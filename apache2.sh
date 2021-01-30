@@ -19,7 +19,7 @@ cd /var/www/
 sudo rm -rf html/
 sudo mkdir html
 cd html 
-sudo git clone https://github.com/Kendubu1/commtest.git .
+sudo git clone https://github.com/azureossd/apache-2.git .
 sudo chmod -R 0755 /var/www/html/
 
 sleep 15
@@ -29,7 +29,7 @@ sudo apt install mysql-server -y
 sudo mysql ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 sudo mysql FLUSH PRIVILEGES;
 sudo mysql -uroot -ppassword -e "CREATE DATABASE authors;"
-wget -O /opt/authors.sql https://raw.githubusercontent.com/Kendubu1/samples/main/apache2/authors.sql
+wget -O /opt/authors.sql https://raw.githubusercontent.com/azureossd/apache-2/main/authors.sql
 sudo mysql -uroot -ppassword authors < /opt/authors.sql
 
 sleep 15
