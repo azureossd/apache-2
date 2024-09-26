@@ -41,7 +41,7 @@ sudo sed -i "s/DirectoryIndex.*/DirectoryIndex index.php index.html/" /etc/apach
 sleep 15
 
 #Update Update/disable Prefork
-sudo a2dismod php7.2
+sudo a2dismod php8.1
 sudo a2dismod mpm_prefork
 sudo a2dismod mpm_worker
 
