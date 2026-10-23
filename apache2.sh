@@ -26,8 +26,8 @@ sleep 15
 
 # Install MySQL & DB
 sudo apt install mysql-server -y
-sudo mysql ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-sudo mysql FLUSH PRIVILEGES;
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';" || exit 1
+sudo mysql -uroot -ppassword -e "FLUSH PRIVILEGES;" || exit 1
 sudo mysql -uroot -ppassword -e "CREATE DATABASE authors;"
 wget -O /opt/authors.sql https://raw.githubusercontent.com/azureossd/apache-2/main/authors.sql
 sudo mysql -uroot -ppassword authors < /opt/authors.sql
@@ -41,7 +41,8 @@ sudo sed -i "s/DirectoryIndex.*/DirectoryIndex index.php index.html/" /etc/apach
 sleep 15
 
 #Update Update/disable Prefork
-sudo a2dismod php8.1
+php_version="$(php -r 'echo PHP_MAJOR_VERSION, ".", PHP_MINOR_VERSION;')" || exit 1
+sudo a2dismod "php${php_version}" || exit 1
 sudo a2dismod mpm_prefork
 sudo a2dismod mpm_worker
 
